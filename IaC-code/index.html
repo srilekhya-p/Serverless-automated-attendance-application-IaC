@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1240.0/aws-sdk.min.js"></script>
+</head>
+<body>
+
+    <h2>Upload Student Image</h2>
+    
+    <input type="file" id="fileInput" accept="image/*"><br><br>
+    <input type="text" id="name" placeholder="Enter your name"><br><br>
+    <input type="email" id="email" placeholder="Enter your email"><br><br>
+
+    <button id="uploadBtn">Upload Image</button>
+    <button id="attendanceBtn" disabled>Mark Attendance</button>
+
+    <h3 id="result"></h3>
+
+    <script>
+        // AWS S3 Configuration
+        AWS.config.update({
+            region: 'us-east-1', // Replace with your region
+            credentials: new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: 'us-east-1:d69844e5-1dca-4ab7-8068-f06ee8c07bde' // Replace with actual Identity Pool ID
+            })
+        });
+
+        const s3 = new AWS.S3();
+        const bucketName = "proj3-uco-bucket";
+        let uploadedFilePath = ""; // Store uploaded file path
+
+
+        // Upload File to S3
+        document.getElementById("uploadBtn").addEventListener("click", async function() {
+            const file = document.getElementById("fileInput").files[0];
+            if (!file) {
+                alert("Please select a file first!");
+                return;
+            }
+
+            const params = {
+                Bucket: bucketName,
+                Key: `studentupload/${file.name}`,
+                Body: file,
+                ContentType: file.type,
+            };
+
+            try {
+                const uploadResult = await s3.upload(params).promise();
+                //uploadedFilePath = uploadResult.Location; // Store S3 URL
+                uploadedFilePath = `s3://proj3-uco-bucket/studentupload/${file.name}`;
+                console.log("Uploaded file path:", uploadedFilePath);
+
+                document.getElementById("attendanceBtn").disabled = false;
+                alert("File uploaded successfully!");
+            } catch (error) {
+                console.error("Upload Error:", error);
+                alert("Failed to upload file.");
+            }
+        });
+
+        // API Gateway Attendance Marking
+        document.getElementById("attendanceBtn").addEventListener("click", function() {
+            const userName = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            if (!userName || !email || !uploadedFilePath) {
+                alert("Please fill in all fields and upload an image.");
+                return;
+            }
+
+            const attendanceApiUrl = "https://zjr3hfwofl.execute-api.us-east-1.amazonaws.com/prod/attendance"; // Your API Gateway URL
+
+            const requestData = {
+                userImageS3Path: uploadedFilePath,
+                userName: userName,
+                email: email,
+                classDate: "2025-03-09"
+            };
+
+            fetch(attendanceApiUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("API Response:", data);
+                const participation = JSON.parse(data.body).participation;
+                document.getElementById("result").innerText = participation ? "Attendance Marked: Present ✅" : "Attendance Marked: Absent ❌";
+            })
+            .catch(error => console.error("API Error:", error));
+        });
+    </script>
+
+</body>
+</html>

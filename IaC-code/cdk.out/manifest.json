@@ -1,0 +1,205 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "Proj3InfraStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "Proj3InfraStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "Proj3InfraStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "Proj3InfraStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/9c5e7dad35ff80dc166fba432c7507d9945fb5f43477d67a1bcdaa24a76ff9c6.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "Proj3InfraStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "Proj3InfraStack.assets"
+      ],
+      "metadata": {
+        "/Proj3InfraStack/Proj3Bucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Proj3BucketC1BDAE3F"
+          }
+        ],
+        "/Proj3InfraStack/Proj3Records": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "Proj3RecordsAA6C262B"
+            }
+          }
+        ],
+        "/Proj3InfraStack/Proj3Records/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Proj3RecordsAA6C262B"
+          }
+        ],
+        "/Proj3InfraStack/LambdaExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaExecutionRoleD5C26073"
+          }
+        ],
+        "/Proj3InfraStack/LambdaExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaExecutionRoleDefaultPolicy6D69732F"
+          }
+        ],
+        "/Proj3InfraStack/Proj3AttendanceLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Proj3AttendanceLambdaE76BE921"
+          }
+        ],
+        "/Proj3InfraStack/Proj3Api/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Proj3ApiE4A3E26F"
+          }
+        ],
+        "/Proj3InfraStack/Proj3Api/CloudWatchRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Proj3ApiCloudWatchRoleF33BFD34"
+          }
+        ],
+        "/Proj3InfraStack/Proj3Api/Account": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Proj3ApiAccountD7F2B291"
+          }
+        ],
+        "/Proj3InfraStack/Proj3Api/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Proj3ApiDeploymentED607AD2bcc3e9d268ef00d05da8c5a38a072567"
+          }
+        ],
+        "/Proj3InfraStack/Proj3Api/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Proj3ApiDeploymentStageprodBFBBF6BF"
+          }
+        ],
+        "/Proj3InfraStack/Proj3Api/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Proj3ApiEndpoint52EEC75D"
+          }
+        ],
+        "/Proj3InfraStack/Proj3Api/Default/attendance/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Proj3Apiattendance935C390C"
+          }
+        ],
+        "/Proj3InfraStack/Proj3Api/Default/attendance/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Proj3ApiattendanceOPTIONSB2F43127"
+          }
+        ],
+        "/Proj3InfraStack/Proj3Api/Default/attendance/POST/ApiPermission.Proj3InfraStackProj3Api082E0BA8.POST..attendance": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Proj3ApiattendancePOSTApiPermissionProj3InfraStackProj3Api082E0BA8POSTattendanceB85D8842"
+          }
+        ],
+        "/Proj3InfraStack/Proj3Api/Default/attendance/POST/ApiPermission.Test.Proj3InfraStackProj3Api082E0BA8.POST..attendance": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Proj3ApiattendancePOSTApiPermissionTestProj3InfraStackProj3Api082E0BA8POSTattendanceC8DB7CAC"
+          }
+        ],
+        "/Proj3InfraStack/Proj3Api/Default/attendance/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Proj3ApiattendancePOSTE414E32C"
+          }
+        ],
+        "/Proj3InfraStack/Proj3IdentityPool": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Proj3IdentityPool"
+          }
+        ],
+        "/Proj3InfraStack/UnauthenticatedRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UnauthenticatedRole01CC4258"
+          }
+        ],
+        "/Proj3InfraStack/IdentityPoolRoleAttachment": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IdentityPoolRoleAttachment"
+          }
+        ],
+        "/Proj3InfraStack/CognitoIdentityPoolId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CognitoIdentityPoolId"
+          }
+        ],
+        "/Proj3InfraStack/AttendanceAPIInvokeURL": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AttendanceAPIInvokeURL"
+          }
+        ],
+        "/Proj3InfraStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/Proj3InfraStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/Proj3InfraStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/Proj3InfraStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "Proj3InfraStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

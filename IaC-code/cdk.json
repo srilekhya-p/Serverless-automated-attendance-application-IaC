@@ -1,0 +1,3 @@
+{
+    "app": "mvn compile exec:java -Dexec.mainClass=com.uco.Proj3App"
+}  
